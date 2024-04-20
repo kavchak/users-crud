@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+
+<div th:switch="${users}">
+    <h2 th:case="null">No users yet!</h2>
+    <div th:case="*">
+        <h2>Users</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="appUser : ${users}">
+                <td th:text="${appUser.name}"></td>
+                <td th:text="${appUser.email}"></td>
+                <td><a th:href="@{/users/edit/{id}(id=${appUser.id})}">Edit</a></td>
+                <td><a th:href="@{/users/delete/{id}(id=${appUser.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/users/add">Add a new appUser</a></p>
+</div>
+
+
+</body>
+</html>
